@@ -33,21 +33,21 @@ jobs:
           helm repo add bitnami https://charts.bitnami.com/bitnami
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@a917fd15b20e8b64b94d9158ad54cd6345335584 # pin@v1.6.0
+        uses: helm/chart-releaser-action@3e001cb8c68933439c7e721650f20a07a1a5c61e # pin@v1.6.0
         with:
           config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 #pin@v3.2.0
+        uses: docker/login-action@327cd5a69de6c009b9ce71bce8395f28e651bf99 #pin@v3.3.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install Cosign
-        uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20 #pin@v3.5.0
+        uses: sigstore/cosign-installer@d7d6bc7722e3daa8354c50bcb52f4837da5e9b6a #pin@v3.7.0
 
       - name: Publish and Sign OCI Charts
         run: |
